@@ -463,6 +463,16 @@ input[type='range']::-moz-range-thumb {
   html {
     font-size: 14px;
   }
+
+  /* Remove default tap highlight on mobile for app-like feel */
+  * {
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  /* Safe area padding utility for bottom nav on notched phones */
+  .pb-safe {
+    padding-bottom: max(0.5rem, env(safe-area-inset-bottom));
+  }
 }
 
 /* ─── cmdk command palette overrides ───────────────────── */

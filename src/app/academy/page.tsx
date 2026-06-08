@@ -93,13 +93,13 @@ export default function AcademyPage() {
     <div className="min-h-screen bg-transparent">
       {/* Header */}
       <motion.section initial={{ opacity: 0, y: -20 }} animate={{ opacity: 1, y: 0 }}
-        className="px-4 md:px-8 pt-12 pb-6 relative overflow-hidden">
+        className="px-4 md:px-8 pt-24 md:pt-12 pb-6 relative overflow-hidden">
         <div className="absolute top-0 right-0 w-64 h-64 bg-islamic-gold/5 blur-[100px] rounded-full -mr-32 -mt-32" />
         <button onClick={() => router.push('/')} className="text-xs text-gray-500 hover:text-white mb-3 flex items-center gap-1 transition-colors">
           ← Back
         </button>
-        <h1 className="text-4xl md:text-5xl font-bold text-white mb-2 tracking-tight">Video <span className="gradient-text-gold">Academy</span></h1>
-        <p className="text-gray-400 text-lg">Master the Quran with guided lectures from elite scholars.</p>
+        <h1 className="text-3xl md:text-5xl font-bold text-white mb-2 tracking-tight">Video <span className="gradient-text-gold">Academy</span></h1>
+        <p className="text-gray-400 text-sm md:text-lg">Master the Quran with guided lectures from elite scholars.</p>
       </motion.section>
 
       {/* Scholar Switcher */}
@@ -163,13 +163,13 @@ export default function AcademyPage() {
       </section>
 
       {/* Search + Stats */}
-      <section className="px-4 md:px-8 py-6 border-y border-white/[0.06] bg-white/[0.04] sticky top-20 z-30 backdrop-blur-2xl">
-        <div className="flex items-center justify-between gap-6 flex-wrap">
-          <div className="flex items-center gap-4">
+      <section className="px-4 md:px-8 py-4 border-y border-white/[0.06] bg-white/[0.04] sticky top-16 lg:top-20 z-30 backdrop-blur-2xl">
+        <div className="flex items-center justify-between gap-4 flex-wrap">
+          <div className="flex items-center gap-3">
             <div className="w-1 h-8 bg-islamic-gold rounded-full" />
             <div>
               <p className="text-[10px] text-gray-500 uppercase tracking-widest font-black">Archive Library</p>
-              <p className="text-sm text-white font-bold">{filteredVideos.length} Available Lectures</p>
+              <p className="text-xs md:text-sm text-white font-bold">{filteredVideos.length} Available Lectures</p>
             </div>
           </div>
           <div className="relative group w-full sm:w-96">
@@ -177,7 +177,7 @@ export default function AcademyPage() {
             <input
               type="text" placeholder={`Search ${selectedScholar.name.split(' ').pop()}'s series...`}
               value={searchQuery} onChange={(e) => setSearchQuery(e.target.value)}
-              className="bg-white/[0.04] border border-white/[0.1] rounded-2xl pl-11 pr-4 py-3.5 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-islamic-gold/30 focus:bg-white/[0.08] w-full transition-all"
+              className="bg-white/[0.04] border border-white/[0.1] rounded-2xl pl-11 pr-4 py-3 text-sm text-white placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-islamic-gold/30 focus:bg-white/[0.08] w-full transition-all"
             />
           </div>
         </div>

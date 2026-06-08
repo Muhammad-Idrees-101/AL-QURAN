@@ -11,9 +11,9 @@ export default function BookmarksPage() {
   const { bookmarks, removeBookmark } = useFeaturesStore();
 
   return (
-    <div className="min-h-screen px-4 md:px-8 pt-8 pb-20">
+    <div className="min-h-screen px-4 md:px-8 pt-24 md:pt-8 pb-24">
       <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }}>
-        <button onClick={() => router.push('/')} className="text-xs text-gray-500 hover:text-white mb-4 flex items-center gap-1 transition-colors">
+        <button onClick={() => router.push('/')} className="hidden md:flex text-xs text-gray-500 hover:text-white mb-4 items-center gap-1 transition-colors">
           ← Back
         </button>
         <div className="flex items-center justify-between mb-8">

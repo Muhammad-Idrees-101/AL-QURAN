@@ -82,21 +82,25 @@ export const GlobalAudioPlayer: React.FC = () => {
     <>
       <AnimatePresence>
         {audioUrl && (
+          <>
           <motion.div
-            initial={{ y: 100, opacity: 0 }}
+            initial={{ y: 200, opacity: 0 }}
             animate={{ y: isCollapsed ? '100%' : '0%', opacity: 1 }}
-            transition={{ type: 'spring', damping: 25, stiffness: 200 }}
-            exit={{ y: 100, opacity: 0 }}
-            className={`fixed bottom-0 left-0 right-0 z-40 pb-safe ${isCollapsed ? 'pb-0' : 'pb-[72px] md:pb-0'}`} // extra padding for bottom nav on mobile
+            transition={{ type: 'spring', damping: 28, stiffness: 220 }}
+            exit={{ y: 200, opacity: 0 }}
+            className="fixed left-0 right-0 z-40 bottom-[72px] md:bottom-0"
           >
-            {/* Toggle Button */}
+            {/* ── Toggle Tab ── */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[100%] z-50">
               <motion.button
                 onClick={() => setIsCollapsed(!isCollapsed)}
                 whileTap={{ scale: 0.9 }}
-                className={`px-6 py-2 backdrop-blur-xl border border-white/10 border-b-0 rounded-t-2xl text-islamic-gold transition-all duration-500 flex items-center justify-center ${isLight ? 'bg-white/90' : 'bg-[#0A1118]/90 shadow-[0_-5px_15px_rgba(0,0,0,0.3)]'}`}
+                className={`px-6 py-1.5 backdrop-blur-xl border border-white/10 border-b-0 rounded-t-2xl text-islamic-gold transition-all duration-300 flex items-center justify-center gap-2 ${isLight ? 'bg-white/90' : 'bg-[#0A1118]/95 shadow-[0_-5px_15px_rgba(0,0,0,0.4)]'}`}
               >
-                <span className="text-[10px] font-black uppercase tracking-widest flex items-center gap-2">
+                {isCollapsed && currentSurahName && (
+                  <span className="text-[10px] text-white/70 font-semibold truncate max-w-[120px]">{currentSurahName}</span>
+                )}
+                <span className="text-[10px] font-black uppercase tracking-widest">
                   {isCollapsed ? '▴ Show Player' : '▾ Hide'}
                 </span>
               </motion.button>
@@ -207,7 +211,8 @@ export const GlobalAudioPlayer: React.FC = () => {
 
               </div>
             </div>
-          </motion.div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
 

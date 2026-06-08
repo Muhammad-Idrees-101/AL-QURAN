@@ -22,11 +22,12 @@ const NAV_ITEMS = [
   { href: '/qibla', label: 'Qibla', icon: '🕌', desc: 'Prayer Times' },
 ];
 
-const MOBILE_BOTTOM_NAV = [
+const MOBILE_BOTTOM_NAV: { href: string | null; label: string; icon: string }[] = [
   { href: '/', label: 'Home', icon: '🏠' },
-  { href: '/player', label: 'Quran', icon: '📖' },
-  { href: '/qibla', label: 'Qibla', icon: '🕌' },
+  { href: '/player', label: 'Tilawat', icon: '📖' },
+  { href: '/tafseer', label: 'Tafseer', icon: '📚' },
   { href: '/bookmarks', label: 'Saved', icon: '🔖' },
+  { href: null, label: 'More', icon: '☰' },
 ];
 
 export const SidebarNavigation: React.FC = () => {
@@ -97,7 +98,7 @@ export const SidebarNavigation: React.FC = () => {
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
-              className="fixed inset-0 top-16 bottom-16 z-30 bg-black/95 backdrop-blur-3xl overflow-y-auto p-4 border-t border-white/[0.05]"
+              className="fixed inset-0 top-16 bottom-[72px] z-30 bg-black/95 backdrop-blur-3xl overflow-y-auto p-4 border-t border-white/[0.05]"
             >
               <div className="grid grid-cols-2 gap-3 pb-6">
                 {NAV_ITEMS.map((item) => {
@@ -132,7 +133,7 @@ export const SidebarNavigation: React.FC = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: 20 }}
-              className="fixed bottom-20 left-4 right-4 z-30 bg-teal-950/80 backdrop-blur-md border border-teal-500/30 rounded-2xl p-2.5 flex items-center justify-between"
+              className="fixed bottom-[84px] left-4 right-4 z-30 bg-teal-950/80 backdrop-blur-md border border-teal-500/30 rounded-2xl p-2.5 flex items-center justify-between shadow-lg"
             >
               <div className="flex items-center gap-3">
                 {isPlaying ? (
@@ -155,19 +156,51 @@ export const SidebarNavigation: React.FC = () => {
         </AnimatePresence>
 
         {/* Mobile Sticky Bottom Nav */}
-        <nav className="fixed bottom-0 left-0 right-0 h-16 z-40 bg-black/80 backdrop-blur-xl border-t border-white/[0.08] flex items-center justify-around px-2 pb-safe">
+        <nav className="fixed bottom-0 left-0 right-0 h-[72px] z-40 bg-black/90 backdrop-blur-xl border-t border-white/[0.08] flex items-center justify-around px-2">
           {MOBILE_BOTTOM_NAV.map((item) => {
+            if (!item.href) {
+              // 'More' button
+              return (
+                <button
+                  key="more"
+                  type="button"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                  className="flex-1 h-full flex flex-col items-center justify-center gap-1 relative"
+                >
+                  <span className={cn(
+                    'w-10 h-10 flex items-center justify-center rounded-xl transition-all duration-300',
+                    mobileMenuOpen ? 'bg-islamic-gold/20 text-islamic-gold scale-110' : 'text-gray-500'
+                  )}>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                      <path d="M4 6h16M4 12h16M4 18h16" />
+                    </svg>
+                  </span>
+                  <span className={cn('text-[9px] font-bold transition-colors duration-300 tracking-wide uppercase', mobileMenuOpen ? 'text-islamic-gold' : 'text-gray-500')}>
+                    More
+                  </span>
+                </button>
+              );
+            }
             const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
             return (
-              <Link key={`bottom-${item.href}`} href={item.href === '/player' ? '/player/1' : item.href} className="w-16 h-full flex flex-col items-center justify-center gap-1">
-                <span className={cn('text-xl transition-transform duration-300', isActive && 'scale-110 drop-shadow-[0_0_8px_rgba(212,175,55,0.6)]')}>
+              <Link
+                key={`bottom-${item.href}`}
+                href={item.href === '/player' ? '/player/1' : item.href}
+                className="flex-1 h-full flex flex-col items-center justify-center gap-1 relative"
+              >
+                <span className={cn(
+                  'w-10 h-10 flex items-center justify-center rounded-xl text-xl transition-all duration-300',
+                  isActive
+                    ? 'bg-islamic-gold/15 scale-110 drop-shadow-[0_0_10px_rgba(212,175,55,0.7)]'
+                    : 'text-gray-500'
+                )}>
                   {item.icon}
                 </span>
-                <span className={cn('text-[9px] font-bold transition-colors duration-300', isActive ? 'text-islamic-gold' : 'text-gray-500')}>
+                <span className={cn('text-[9px] font-bold transition-colors duration-300 tracking-wide uppercase', isActive ? 'text-islamic-gold' : 'text-gray-500')}>
                   {item.label}
                 </span>
                 {item.href === '/bookmarks' && bookmarks.length > 0 && (
-                  <span className="absolute top-2 right-3 w-3 h-3 bg-red-500 rounded-full border border-black text-[7px] text-white flex items-center justify-center font-bold">
+                  <span className="absolute top-2 right-1/4 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-black text-[8px] text-white flex items-center justify-center font-bold">
                     {bookmarks.length}
                   </span>
                 )}

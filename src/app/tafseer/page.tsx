@@ -145,7 +145,7 @@ export default function TafseerPage() {
   );
 
   return (
-    <div className="flex flex-col min-h-screen pt-16 lg:pt-0 pb-16 lg:pb-0">
+    <div className="flex flex-col min-h-screen pt-16 lg:pt-0 pb-24 lg:pb-0">
       {/* Mobile Top App Bar (Replaces Desktop Sticky Header on Mobile & Tablet) */}
       <div className="lg:hidden fixed top-16 left-0 right-0 z-30 bg-[#0d2620]/92 backdrop-blur-xl border-b border-teal-500/10 p-3 flex flex-col gap-3">
         <div className="flex justify-between items-center">
@@ -248,7 +248,7 @@ export default function TafseerPage() {
       </motion.section>
 
       {/* 3-Panel Layout (Desktop) / Mobile & Tablet Content */}
-      <div className="flex-1 flex items-start mt-[130px] lg:mt-0">
+      <div className="flex-1 flex items-start mt-[156px] lg:mt-0">
 
         {/* Left: TOC (Desktop) */}
         <AnimatePresence>

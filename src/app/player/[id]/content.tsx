@@ -59,32 +59,37 @@ export function QuranPlayerContent({ surah, ayahs, initialAyah }: Props) {
       <motion.section
         initial={{ opacity: 0, y: -20 }}
         animate={{ opacity: 1, y: 0 }}
-        className={`sticky top-16 lg:top-0 min-[1200px]:top-20 z-20 theme-sticky-header backdrop-blur-xl border-b px-4 md:px-8 py-4 transition-colors duration-500 ${isLight ? 'border-gray-100 bg-white/95' : 'border-white/[0.06]'
-          }`}
+        className={`sticky top-16 lg:top-0 min-[1200px]:top-20 z-20 theme-sticky-header backdrop-blur-xl border-b transition-colors duration-500 ${isLight ? 'border-gray-100 bg-white/95' : 'border-white/[0.06]'}`}
       >
-        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-          <div>
-            <Link href="/">
+        {/* ── MOBILE HEADER (< md) ── */}
+        <div className="md:hidden px-4 py-3">
+          {/* Row 1: Back + Title + Arabic */}
+          <div className="flex items-center gap-2 mb-2.5">
+            <Link href="/" className="shrink-0">
               <motion.button
                 whileTap={{ scale: 0.95 }}
-                className="text-xs text-gray-500 hover:text-white transition-colors mb-2 flex items-center gap-1"
+                className="w-8 h-8 rounded-full bg-white/[0.08] border border-white/[0.1] flex items-center justify-center text-gray-400 hover:text-white transition-colors"
               >
-                ← Back to Discovery
+                ←
               </motion.button>
             </Link>
-            <div className="flex items-center gap-3">
-              <h1 className={`text-2xl md:text-3xl font-bold truncate transition-colors ${isLight ? 'text-gray-900' : 'text-white'
-                }`}>
+            <div className="flex items-center gap-2 min-w-0 flex-1">
+              <h1 className={`text-lg font-bold truncate transition-colors ${isLight ? 'text-gray-900' : 'text-white'}`}>
                 {surah.name_english}
               </h1>
-              <span className="font-arabic text-xl text-islamic-gold">{surah.name_arabic}</span>
+              <span className="font-arabic text-base text-islamic-gold shrink-0">{surah.name_arabic}</span>
             </div>
+            {/* Settings icon for mobile */}
+            <button
+              onClick={toggleDrawer}
+              className="w-8 h-8 rounded-full bg-white/[0.08] border border-white/[0.1] flex items-center justify-center text-sm shrink-0"
+            >
+              ⚙️
+            </button>
           </div>
-          <div className="flex items-center gap-2 flex-wrap">
-            <Badge variant="emerald">{surah.revelation_type}</Badge>
-            <Badge variant="gold">{surah.ayah_count} Ayahs</Badge>
-            <Badge variant="slate">Surah {surah.id}</Badge>
 
+          {/* Row 2: scrollable badges + play button */}
+          <div className="flex items-center gap-2 overflow-x-auto pb-0.5 -mx-1 px-1 show-scrollbar">
             <PlayDropdown
               surah={surah}
               onFullPlay={() => playFullSurah({
@@ -102,13 +107,64 @@ export function QuranPlayerContent({ surah, ayahs, initialAyah }: Props) {
                 surahAyahCount: surah.ayah_count,
               })}
             />
-
-            <Link href={`/tafseer`}>
-              <Button variant="glass" size="sm">🎬 Watch Tafseer</Button>
+            <Badge variant="emerald" className="rounded-lg px-2.5 py-1 text-[10px] whitespace-nowrap shrink-0">{surah.revelation_type}</Badge>
+            <Badge variant="gold" className="rounded-lg px-2.5 py-1 text-[10px] whitespace-nowrap shrink-0">{surah.ayah_count} Ayahs</Badge>
+            <Badge variant="slate" className="rounded-lg px-2.5 py-1 text-[10px] whitespace-nowrap shrink-0">Surah {surah.id}</Badge>
+            <Link href="/tafseer" className="shrink-0">
+              <span className="inline-flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-white/[0.08] border border-white/[0.1] text-[10px] font-semibold text-gray-300 whitespace-nowrap">🎬 Tafseer</span>
             </Link>
-            <Button variant="glass" size="sm" onClick={toggleDrawer}>
-              ⚙️ Settings
-            </Button>
+          </div>
+        </div>
+
+        {/* ── DESKTOP HEADER (≥ md) ── */}
+        <div className="hidden md:flex flex-col md:flex-row md:items-center md:justify-between gap-3 px-8 py-4">
+          <div>
+            <Link href="/">
+              <motion.button
+                whileTap={{ scale: 0.95 }}
+                className="text-xs text-gray-500 hover:text-white transition-colors mb-2 flex items-center gap-1"
+              >
+                ← Back to Discovery
+              </motion.button>
+            </Link>
+            <div className="flex items-center gap-3">
+              <h1 className={`text-2xl md:text-3xl font-bold truncate transition-colors ${isLight ? 'text-gray-900' : 'text-white'}`}>
+                {surah.name_english}
+              </h1>
+              <span className="font-arabic text-xl text-islamic-gold">{surah.name_arabic}</span>
+            </div>
+          </div>
+          <div className="flex flex-col gap-3 mt-1">
+            <div className="flex items-center gap-2 flex-wrap">
+              <Badge variant="emerald" className="rounded-xl px-3 py-1.5">{surah.revelation_type}</Badge>
+              <Badge variant="gold" className="rounded-xl px-3 py-1.5">{surah.ayah_count} Ayahs</Badge>
+              <Badge variant="slate" className="rounded-xl px-3 py-1.5">Surah {surah.id}</Badge>
+              <PlayDropdown
+                surah={surah}
+                onFullPlay={() => playFullSurah({
+                  surahId: surah.id,
+                  surahName: surah.name_english,
+                  surahArabic: surah.name_arabic,
+                  surahAyahCount: surah.ayah_count
+                })}
+                onAyahPlay={() => setCurrentAyah({
+                  ayahId: ayahs[0].id,
+                  surahId: surah.id,
+                  ayahNumber: 1,
+                  surahName: surah.name_english,
+                  surahArabic: surah.name_arabic,
+                  surahAyahCount: surah.ayah_count,
+                })}
+              />
+            </div>
+            <div className="flex items-center gap-2">
+              <Link href="/tafseer">
+                <Button variant="glass" size="sm" className="rounded-xl bg-white/[0.08] hover:bg-white/[0.12] border-white/[0.12] px-4 py-2">🎬 Watch Tafseer</Button>
+              </Link>
+              <Button variant="glass" size="sm" onClick={toggleDrawer} className="rounded-xl bg-white/[0.08] hover:bg-white/[0.12] border-white/[0.12] px-4 py-2">
+                ⚙️ Settings
+              </Button>
+            </div>
           </div>
         </div>
       </motion.section>
@@ -225,7 +281,7 @@ function PlayDropdown({
         variant="gold"
         size="sm"
         onClick={() => setIsOpen(!isOpen)}
-        className="flex items-center gap-2 group"
+        className="flex items-center gap-2 group rounded-xl px-4 py-2"
       >
         <span>▶ Play Surah</span>
         <motion.span
@@ -314,8 +370,7 @@ function FloatingControls() {
           initial={{ opacity: 0, y: 20, scale: 0.8 }}
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.8 }}
-          className={`fixed right-6 z-50 transition-all duration-500 ease-out ${currentAyahId ? 'bottom-20 md:bottom-24' : 'bottom-14 md:bottom-20'
-            }`}
+          className={`fixed right-4 md:right-6 z-50 transition-all duration-500 ease-out ${currentAyahId ? 'bottom-[157px] md:bottom-[112px]' : 'bottom-24 md:bottom-20'}`}
         >
           <motion.button
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}

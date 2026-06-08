@@ -32,13 +32,13 @@ export default function TopicsPage() {
     : [];
 
   return (
-    <div className="min-h-screen px-4 md:px-8 pt-8 pb-20">
+    <div className="min-h-screen px-4 md:px-8 pt-24 md:pt-8 pb-24">
       <motion.div initial={{ opacity: 0, y: -16 }} animate={{ opacity: 1, y: 0 }}>
-        <button onClick={() => router.push('/')} className="text-xs text-gray-500 hover:text-white mb-4 flex items-center gap-1 transition-colors">
+        <button onClick={() => router.push('/')} className="hidden md:flex text-xs text-gray-500 hover:text-white mb-4 items-center gap-1 transition-colors">
           ← Back
         </button>
-        <h1 className="text-3xl font-bold text-white mb-2">📂 Topics</h1>
-        <p className="text-sm text-gray-400 mb-8">Browse Surahs by theme and subject</p>
+        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">📂 Topics</h1>
+        <p className="text-sm text-gray-400 mb-6">Browse Surahs by theme and subject</p>
       </motion.div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 mb-10">
