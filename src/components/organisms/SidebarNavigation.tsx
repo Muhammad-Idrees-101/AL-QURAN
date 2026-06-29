@@ -156,7 +156,14 @@ export const SidebarNavigation: React.FC = () => {
         </AnimatePresence>
 
         {/* Mobile Sticky Bottom Nav */}
-        <nav className="fixed bottom-0 left-0 right-0 h-[72px] z-40 bg-black/90 backdrop-blur-xl border-t border-white/[0.08] flex items-center justify-around px-2">
+        <nav
+          id="mobile-bottom-nav"
+          aria-label="Mobile bottom navigation"
+          className={cn(
+            "fixed bottom-0 left-0 right-0 h-[72px] z-40 bg-black/90 backdrop-blur-xl border-t border-white/[0.08] flex items-center justify-around px-2 transition-transform duration-300",
+            pathname.startsWith('/player') ? "translate-y-full" : "translate-y-0"
+          )}
+        >
           {MOBILE_BOTTOM_NAV.map((item) => {
             if (!item.href) {
               // 'More' button

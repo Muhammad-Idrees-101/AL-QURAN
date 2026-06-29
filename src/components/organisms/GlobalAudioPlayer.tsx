@@ -6,6 +6,8 @@ import { Button } from '@/components/atoms';
 import { usePlayerStore } from '@/stores/playerStore';
 import { useSettingsStore } from '@/stores/settingsStore';
 import { AudioReciter, Theme } from '@/types/quran';
+import { usePathname } from 'next/navigation';
+import { cn } from '@/utils/cn';
 
 // ─── Reciter Metadata (Duplicated for Audio Player) ──────────
 const RECITERS = {
@@ -27,6 +29,7 @@ function formatTime(s: number): string {
 }
 
 export const GlobalAudioPlayer: React.FC = () => {
+  const pathname = usePathname();
   const audioRef = useRef<HTMLAudioElement>(null);
   const {
     isPlaying, playbackRate, volume, currentTime, duration, audioUrl,
@@ -88,7 +91,10 @@ export const GlobalAudioPlayer: React.FC = () => {
             animate={{ y: isCollapsed ? '100%' : '0%', opacity: 1 }}
             transition={{ type: 'spring', damping: 28, stiffness: 220 }}
             exit={{ y: 200, opacity: 0 }}
-            className="fixed left-0 right-0 z-40 bottom-[72px] md:bottom-0"
+            className={cn(
+              "fixed left-0 right-0 z-40 md:bottom-0 transition-all duration-300",
+              pathname.startsWith('/player') ? "bottom-0" : "bottom-[72px]"
+            )}
           >
             {/* ── Toggle Tab ── */}
             <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[100%] z-50">
@@ -97,11 +103,8 @@ export const GlobalAudioPlayer: React.FC = () => {
                 whileTap={{ scale: 0.9 }}
                 className={`px-6 py-1.5 backdrop-blur-xl border border-white/10 border-b-0 rounded-t-2xl text-islamic-gold transition-all duration-300 flex items-center justify-center gap-2 ${isLight ? 'bg-white/90' : 'bg-[#0A1118]/95 shadow-[0_-5px_15px_rgba(0,0,0,0.4)]'}`}
               >
-                {isCollapsed && currentSurahName && (
-                  <span className="text-[10px] text-white/70 font-semibold truncate max-w-[120px]">{currentSurahName}</span>
-                )}
                 <span className="text-[10px] font-black uppercase tracking-widest">
-                  {isCollapsed ? '▴ Show Player' : '▾ Hide'}
+                  {isCollapsed ? '▴ Show Player' : '▾ Hide Player'}
                 </span>
               </motion.button>
             </div>
