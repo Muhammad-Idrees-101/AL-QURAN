@@ -299,14 +299,37 @@ body.theme-light .text-gray-600 {
 }
 
 /* Badge and specific text color overrides for Light Mode */
-body.theme-light .text-emerald-300 { @apply text-emerald-800; }
-body.theme-light .text-slate-300 { @apply text-slate-800; }
-body.theme-light .text-blue-300 { @apply text-blue-800; }
-body.theme-light .text-purple-300 { @apply text-purple-800; }
-body.theme-light .text-amber-300 { @apply text-amber-800; }
-body.theme-light .text-amber-200 { @apply text-amber-900; }
-body.theme-light .text-white\/10 { @apply text-slate-400/20; }
-body.theme-light .text-white\/20 { @apply text-slate-400/30; }
+body.theme-light .text-emerald-300 {
+  @apply text-emerald-800;
+}
+
+body.theme-light .text-slate-300 {
+  @apply text-slate-800;
+}
+
+body.theme-light .text-blue-300 {
+  @apply text-blue-800;
+}
+
+body.theme-light .text-purple-300 {
+  @apply text-purple-800;
+}
+
+body.theme-light .text-amber-300 {
+  @apply text-amber-800;
+}
+
+body.theme-light .text-amber-200 {
+  @apply text-amber-900;
+}
+
+body.theme-light .text-white\/10 {
+  @apply text-slate-400/20;
+}
+
+body.theme-light .text-white\/20 {
+  @apply text-slate-400/30;
+}
 
 /* Light Mode Prose */
 body.theme-light .prose-tafseer p {
