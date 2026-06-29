@@ -528,3 +528,45 @@ input[type='range']::-moz-range-thumb {
   @apply float-left text-5xl font-bold text-islamic-gold mr-2 mt-1 leading-none;
   font-family: 'Scheherazade New', serif;
 }
+
+/* ─── Custom Scrollbar (PC/Laptop Only) ─────────────────── */
+
+/* Hide scrollbar on touch devices (Mobile/Tablet) */
+@media (pointer: coarse) {
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  * {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
+  }
+}
+
+/* Show styled scrollbar on fine pointer devices (PC/Laptop) */
+@media (pointer: fine) {
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    @apply bg-islamic-gold/30 rounded-full;
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-islamic-gold/50;
+  }
+
+  /* Light Theme Overrides */
+  body.theme-light ::-webkit-scrollbar-thumb {
+    @apply bg-emerald-800/30;
+  }
+  
+  body.theme-light ::-webkit-scrollbar-thumb:hover {
+    @apply bg-emerald-800/50;
+  }
+}
