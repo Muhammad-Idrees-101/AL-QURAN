@@ -536,46 +536,96 @@ input[type='range']::-moz-range-thumb {
   ::-webkit-scrollbar {
     display: none;
   }
-  html {
-    scrollbar-width: none; /* Firefox */
+  * {
+    -ms-overflow-style: none;  /* IE and Edge */
+    scrollbar-width: none;  /* Firefox */
   }
 }
 
-/* Show styled scrollbar on fine pointer devices (PC/Laptop) */
+/* Show styled scrollbar with arrow buttons on fine pointer devices (PC/Laptop) */
 @media (pointer: fine) {
   ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
+    width: 12px;
+    height: 12px;
   }
 
   ::-webkit-scrollbar-track {
-    background: transparent;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 10px;
   }
 
-  /* Dark mode thumb: translucent gold */
   ::-webkit-scrollbar-thumb {
-    background-color: rgba(212, 165, 116, 0.30);
-    border-radius: 9999px;
+    background: rgba(212, 165, 116, 0.35);
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
   }
 
   ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(212, 165, 116, 0.55);
+    background: rgba(212, 165, 116, 0.6);
+    background-clip: content-box;
+    border: 2px solid transparent;
+  }
+
+  /* ── Scrollbar Arrow Buttons ── */
+  ::-webkit-scrollbar-button {
+    display: block;
+    background-color: rgba(255, 255, 255, 0.04);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: 8px;
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-button:hover {
+    background-color: rgba(212, 165, 116, 0.2);
+  }
+
+  /* Up arrow */
+  ::-webkit-scrollbar-button:vertical:decrement {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M5 0L10 6H0z' fill='%23D4A574' opacity='0.7'/%3E%3C/svg%3E");
+    height: 12px;
+  }
+  /* Down arrow */
+  ::-webkit-scrollbar-button:vertical:increment {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M5 6L0 0H10z' fill='%23D4A574' opacity='0.7'/%3E%3C/svg%3E");
+    height: 12px;
+  }
+  /* Left arrow */
+  ::-webkit-scrollbar-button:horizontal:decrement {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 10'%3E%3Cpath d='M0 5L6 0V10z' fill='%23D4A574' opacity='0.7'/%3E%3C/svg%3E");
+    width: 12px;
+  }
+  /* Right arrow */
+  ::-webkit-scrollbar-button:horizontal:increment {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 6 10'%3E%3Cpath d='M6 5L0 0V10z' fill='%23D4A574' opacity='0.7'/%3E%3C/svg%3E");
+    width: 12px;
   }
 
   /* Light Theme Overrides */
+  body.theme-light ::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.04);
+  }
   body.theme-light ::-webkit-scrollbar-thumb {
-    background-color: rgba(6, 78, 59, 0.30);
-    border-radius: 9999px;
+    background: rgba(6, 78, 59, 0.3);
+    background-clip: content-box;
+    border: 2px solid transparent;
   }
-
   body.theme-light ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(6, 78, 59, 0.55);
+    background: rgba(6, 78, 59, 0.55);
+    background-clip: content-box;
+    border: 2px solid transparent;
   }
-
-  /* Firefox scrollbar */
-  html {
-    scrollbar-width: thin;
-    scrollbar-color: rgba(212, 165, 116, 0.35) transparent;
+  body.theme-light ::-webkit-scrollbar-button {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+  body.theme-light ::-webkit-scrollbar-button:hover {
+    background-color: rgba(6, 78, 59, 0.15);
+  }
+  body.theme-light ::-webkit-scrollbar-button:vertical:decrement {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M5 0L10 6H0z' fill='%23064e3b' opacity='0.6'/%3E%3C/svg%3E");
+  }
+  body.theme-light ::-webkit-scrollbar-button:vertical:increment {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 6'%3E%3Cpath d='M5 6L0 0H10z' fill='%23064e3b' opacity='0.6'/%3E%3C/svg%3E");
   }
 }
 
