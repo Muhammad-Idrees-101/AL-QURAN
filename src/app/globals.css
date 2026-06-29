@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Scheherazade+New:wght@400;700&family=Lateef:wght@400;700&display=swap');
+/* Font is loaded non-blocking via <link preload> in layout.tsx — do NOT add @import here */
 
 @tailwind base;
 @tailwind components;
@@ -568,5 +568,48 @@ input[type='range']::-moz-range-thumb {
   
   body.theme-light ::-webkit-scrollbar-thumb:hover {
     @apply bg-emerald-800/50;
+  }
+}
+
+/* ─── Mobile Performance Optimizations ──────────────────── */
+@media (max-width: 768px) {
+  /* Reduce expensive backdrop-blur on mobile for faster GPU compositing */
+  .backdrop-blur-3xl {
+    backdrop-filter: blur(16px) !important;
+    -webkit-backdrop-filter: blur(16px) !important;
+  }
+  .backdrop-blur-xl {
+    backdrop-filter: blur(12px) !important;
+    -webkit-backdrop-filter: blur(12px) !important;
+  }
+
+  /* Hint browser to promote ambient glow divs to their own GPU layer */
+  .pointer-events-none[class*="blur-"] {
+    will-change: transform;
+    transform: translateZ(0);
+  }
+
+  /* Use faster text rendering on mobile */
+  html {
+    text-rendering: optimizeSpeed;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Defer paint for below-fold content sections */
+  section + section {
+    content-visibility: auto;
+    contain-intrinsic-size: 0 400px;
+  }
+}
+
+/* ─── Reduced Motion ─────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+  html {
+    scroll-behavior: auto;
   }
 }

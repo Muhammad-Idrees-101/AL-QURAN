@@ -68,7 +68,7 @@ export default function HomePage() {
               whileTap={{ scale: 0.95 }}
               className="w-14 h-14 md:w-16 md:h-16 rounded-2xl overflow-hidden shadow-2xl shadow-teal-500/20 flex items-center justify-center mb-6 cursor-pointer ring-2 ring-islamic-gold/20"
             >
-              <Image src="/logo.png" alt="Al-Quran Logo" width={64} height={64} className="object-cover" />
+              <Image src="/logo.png" alt="Al-Quran Logo" width={64} height={64} className="object-cover" priority fetchPriority="high" />
             </motion.div>
           </Link>
 

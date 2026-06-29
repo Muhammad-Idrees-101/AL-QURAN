@@ -49,42 +49,50 @@ export const SidebarNavigation: React.FC = () => {
       ========================================= */}
       <div className="lg:hidden">
         {/* Mobile Top Header */}
-        <header className="fixed top-0 left-0 right-0 h-16 z-40 bg-black/40 backdrop-blur-xl border-b border-white/[0.08] flex items-center justify-between px-4">
-          <Link href="/" className="flex items-center gap-2">
+        <header id="mobile-header" role="banner" aria-label="Al-Quran Interactive mobile navigation" className="fixed top-0 left-0 right-0 h-16 z-40 bg-black/40 backdrop-blur-xl border-b border-white/[0.08] flex items-center justify-between px-4">
+          <Link href="/" aria-label="Al-Quran Interactive home" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg overflow-hidden relative">
-              <Image src="/logo.png" alt="Logo" fill className="object-cover" />
+              <Image src="/logo.png" alt="Al-Quran Interactive Logo" fill className="object-cover" priority />
             </div>
             <div>
-              <h1 className="text-sm font-bold text-white leading-tight">Al-Quran</h1>
+              <span className="text-sm font-bold text-white leading-tight block">Al-Quran</span>
               <span className="text-[10px] font-medium text-islamic-gold">Interactive</span>
             </div>
           </Link>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2" role="group" aria-label="Header controls">
             {/* Dark/Light Toggle */}
             <button
+              id="mobile-theme-toggle"
               type="button"
               onClick={toggleTheme}
               suppressHydrationWarning
+              aria-label={isDark ? 'Switch to light mode' : 'Switch to dark mode'}
               className="w-8 h-8 rounded-full bg-white/[0.05] border border-white/[0.1] flex items-center justify-center text-sm"
             >
               {isDark ? '🌙' : '☀️'}
             </button>
             {/* Settings Toggle */}
             <button
+              id="mobile-settings-toggle"
               type="button"
               onClick={toggleDrawer}
+              aria-label="Open settings"
               className="w-8 h-8 rounded-full bg-white/[0.05] border border-white/[0.1] flex items-center justify-center text-sm"
             >
               ⚙️
             </button>
             {/* More Menu Toggle */}
             <button
+              id="mobile-menu-toggle"
               type="button"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+              aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
+              aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-more-menu"
               className="w-8 h-8 rounded-full bg-white/[0.05] border border-white/[0.1] flex items-center justify-center text-sm"
             >
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" aria-hidden="true">
                 <path d="M4 6h16M4 12h16M4 18h16" />
               </svg>
             </button>
@@ -95,11 +103,16 @@ export const SidebarNavigation: React.FC = () => {
         <AnimatePresence>
           {mobileMenuOpen && (
             <motion.div
+              id="mobile-more-menu"
+              role="dialog"
+              aria-label="Navigation menu"
+              aria-modal="true"
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               className="fixed inset-0 top-16 bottom-[72px] z-30 bg-black/95 backdrop-blur-3xl overflow-y-auto p-4 border-t border-white/[0.05]"
             >
+              <nav aria-label="All navigation links">
               <div className="grid grid-cols-2 gap-3 pb-6">
                 {NAV_ITEMS.map((item) => {
                   const isActive = item.href === '/' ? pathname === '/' : pathname.startsWith(item.href);
@@ -107,6 +120,8 @@ export const SidebarNavigation: React.FC = () => {
                     <Link
                       key={`more-${item.href}`}
                       href={item.href === '/player' ? '/player/1' : item.href}
+                      aria-label={item.desc}
+                      aria-current={isActive ? 'page' : undefined}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <div className={cn(
@@ -115,13 +130,14 @@ export const SidebarNavigation: React.FC = () => {
                           ? 'bg-islamic-gold/15 border-islamic-gold/30 text-islamic-gold'
                           : 'bg-white/[0.03] border-white/[0.05] text-gray-300'
                       )}>
-                        <span className="text-2xl">{item.icon}</span>
+                        <span className="text-2xl" aria-hidden="true">{item.icon}</span>
                         <span className="text-xs font-bold">{item.label}</span>
                       </div>
                     </Link>
                   );
                 })}
               </div>
+              </nav>
             </motion.div>
           )}
         </AnimatePresence>
