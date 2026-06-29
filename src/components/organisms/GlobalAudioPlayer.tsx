@@ -86,134 +86,134 @@ export const GlobalAudioPlayer: React.FC = () => {
       <AnimatePresence>
         {audioUrl && (
           <>
-          <motion.div
-            initial={{ y: 200, opacity: 0 }}
-            animate={{ y: isCollapsed ? '100%' : '0%', opacity: 1 }}
-            transition={{ type: 'spring', damping: 28, stiffness: 220 }}
-            exit={{ y: 200, opacity: 0 }}
-            className={cn(
-              "fixed left-0 right-0 z-40 md:bottom-0 transition-all duration-300",
-              pathname.startsWith('/player') ? "bottom-0" : "bottom-[72px]"
-            )}
-          >
-            {/* ── Toggle Tab ── */}
-            <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[100%] z-50">
-              <motion.button
-                onClick={() => setIsCollapsed(!isCollapsed)}
-                whileTap={{ scale: 0.9 }}
-                className={`px-6 py-1.5 backdrop-blur-xl border border-white/10 border-b-0 rounded-t-2xl text-islamic-gold transition-all duration-300 flex items-center justify-center gap-2 ${isLight ? 'bg-white/90' : 'bg-[#0A1118]/95 shadow-[0_-5px_15px_rgba(0,0,0,0.4)]'}`}
-              >
-                <span className="text-[10px] font-black uppercase tracking-widest">
-                  {isCollapsed ? '▴ Show Player' : '▾ Hide Player'}
-                </span>
-              </motion.button>
-            </div>
-
-            <audio
-              ref={audioRef}
-              onTimeUpdate={() => audioRef.current && setCurrentTime(audioRef.current.currentTime)}
-              onLoadedMetadata={() => audioRef.current && setDuration(audioRef.current.duration)}
-              onEnded={playNextAyah}
-              preload="auto"
-            />
-
-            <div className={`pt-4 pb-4 px-4 md:px-6 backdrop-blur-3xl transition-colors duration-500 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] ${isLight ? 'bg-white/95 border-t border-gray-200' : 'bg-[#0A1118]/95 border-t border-white/[0.08]'}`}>
-
-              {/* Progress Bar */}
-              <div className="w-full h-2 bg-white/10 rounded-full cursor-pointer mb-4 group relative" onClick={handleSeek}>
-                <motion.div
-                  className="h-full bg-gradient-to-r from-teal-500 to-islamic-gold rounded-full relative"
-                  style={{ width: `${pct}%` }}
-                  transition={{ type: 'tween', duration: 0.1 }}
+            <motion.div
+              initial={{ y: 200, opacity: 0 }}
+              animate={{ y: isCollapsed ? '100%' : '0%', opacity: 1 }}
+              transition={{ type: 'spring', damping: 28, stiffness: 220 }}
+              exit={{ y: 200, opacity: 0 }}
+              className={cn(
+                "fixed left-0 right-0 z-40 md:bottom-0 transition-all duration-300",
+                pathname.startsWith('/player') ? "bottom-0" : "bottom-[72px]"
+              )}
+            >
+              {/* ── Toggle Tab ── */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-[100%] z-50">
+                <motion.button
+                  onClick={() => setIsCollapsed(!isCollapsed)}
+                  whileTap={{ scale: 0.9 }}
+                  className={`px-6 py-1.5 backdrop-blur-xl border border-white/10 border-b-0 rounded-t-2xl text-islamic-gold transition-all duration-300 flex items-center justify-center gap-2 ${isLight ? 'bg-white/90' : 'bg-[#0A1118]/95 shadow-[0_-5px_15px_rgba(0,0,0,0.4)]'}`}
                 >
-                  <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-islamic-gold rounded-full shadow-[0_0_10px_rgba(212,175,55,0.8)] opacity-100 transition-opacity" />
-                </motion.div>
+                  <span className="text-[10px] font-black uppercase tracking-widest">
+                    {isCollapsed ? '▴ Show Player' : '▾ Hide Player'}
+                  </span>
+                </motion.button>
               </div>
 
-              <div className="flex flex-col md:flex-row items-center gap-4">
-                {/* Mobile Top Row: Info + Reciter Button */}
-                <div className="flex items-center justify-between w-full md:w-auto md:flex-1 gap-3">
-                  <div className="flex items-center gap-3 min-w-0">
-                    <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-islamic-gold font-arabic text-xl shadow-lg shrink-0 ${isLight ? 'bg-teal-500/10' : 'bg-teal-900/40 border border-teal-500/30'}`}>
-                      ﷽
-                    </div>
-                    <div className="min-w-0">
-                      <p className={`text-sm md:text-base font-bold truncate ${isLight ? 'text-gray-900' : 'text-white'}`}>
-                        {currentSurahName || 'No track'}
-                      </p>
-                      <p className={`text-[10px] md:text-xs truncate ${isLight ? 'text-gray-500' : 'text-teal-400'}`}>
-                        {currentSurahArabic} {currentAyahNumber ? `• Ayah ${currentAyahNumber}` : ''}
-                      </p>
-                    </div>
-                  </div>
+              <audio
+                ref={audioRef}
+                onTimeUpdate={() => audioRef.current && setCurrentTime(audioRef.current.currentTime)}
+                onLoadedMetadata={() => audioRef.current && setDuration(audioRef.current.duration)}
+                onEnded={playNextAyah}
+                preload="auto"
+              />
 
-                  {/* Player Settings / Reciter Modal Trigger (Mobile Only) */}
-                  <button
-                    onClick={() => setShowSettingsModal(true)}
-                    className="md:hidden flex flex-col items-center justify-center p-2 rounded-xl bg-white/[0.05] border border-white/[0.1] active:scale-95 transition-transform"
+              <div className={`pt-4 pb-4 px-4 md:px-6 backdrop-blur-3xl transition-colors duration-500 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] ${isLight ? 'bg-white/95 border-t border-gray-200' : 'bg-[#0A1118]/95 border-t border-white/[0.08]'}`}>
+
+                {/* Progress Bar */}
+                <div className="w-full h-2 bg-white/10 rounded-full cursor-pointer mb-4 group relative" onClick={handleSeek}>
+                  <motion.div
+                    className="h-full bg-gradient-to-r from-teal-500 to-islamic-gold rounded-full relative"
+                    style={{ width: `${pct}%` }}
+                    transition={{ type: 'tween', duration: 0.1 }}
                   >
-                    <span className="text-lg">🎙️</span>
-                    <span className="text-[8px] font-bold text-gray-400 mt-1 uppercase">Settings</span>
-                  </button>
+                    <div className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 bg-islamic-gold rounded-full shadow-[0_0_10px_rgba(212,175,55,0.8)] opacity-100 transition-opacity" />
+                  </motion.div>
                 </div>
 
-                {/* Controls Row */}
-                <div className="flex flex-col md:flex-row items-center w-full md:w-auto gap-4">
-                  {/* Time & Playback Controls */}
-                  <div className="flex items-center justify-between w-full md:w-auto md:gap-6">
-                    <span className={`text-[10px] md:text-xs font-mono font-medium ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
-                      {formatTime(currentTime)}
-                    </span>
-
-                    <div className="flex items-center gap-4 md:gap-3">
-                      <button onClick={playPrevAyah} className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:bg-white/10 active:scale-90 transition-all text-xl">
-                        ⏮
-                      </button>
-                      <button
-                        onClick={() => setIsPlaying(!isPlaying)}
-                        className="w-14 h-14 rounded-full bg-gradient-to-br from-islamic-gold to-amber-500 shadow-[0_0_15px_rgba(212,175,55,0.4)] flex items-center justify-center text-black text-2xl active:scale-90 transition-transform"
-                      >
-                        {isLoading ? <span className="animate-spin">⟳</span> : isPlaying ? '⏸' : '▶'}
-                      </button>
-                      <button onClick={playNextAyah} className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:bg-white/10 active:scale-90 transition-all text-xl">
-                        ⏭
-                      </button>
+                <div className="flex flex-col md:flex-row items-center gap-4">
+                  {/* Mobile Top Row: Info + Reciter Button */}
+                  <div className="flex items-center justify-between w-full md:w-auto md:flex-1 gap-3">
+                    <div className="flex items-center gap-3 min-w-0">
+                      <div className={`w-12 h-12 rounded-xl flex items-center justify-center text-islamic-gold text-3xl font-sans shadow-lg shrink-0 ${isLight ? 'bg-teal-500/10' : 'bg-teal-900/40 border border-teal-500/30'}`}>
+                        ﷽
+                      </div>
+                      <div className="min-w-0">
+                        <p className={`text-sm md:text-base font-bold truncate ${isLight ? 'text-gray-900' : 'text-white'}`}>
+                          {currentSurahName || 'No track'}
+                        </p>
+                        <p className={`text-[10px] md:text-xs truncate ${isLight ? 'text-gray-500' : 'text-teal-400'}`}>
+                          {currentSurahArabic} {currentAyahNumber ? `• Ayah ${currentAyahNumber}` : ''}
+                        </p>
+                      </div>
                     </div>
 
-                    <span className={`text-[10px] md:text-xs font-mono font-medium ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
-                      {formatTime(duration)}
-                    </span>
-                  </div>
-
-                  {/* Desktop Only: Volume & Speed & Reciter */}
-                  <div className="hidden md:flex items-center gap-3">
+                    {/* Player Settings / Reciter Modal Trigger (Mobile Only) */}
                     <button
                       onClick={() => setShowSettingsModal(true)}
-                      className="px-3 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.1] text-xs font-semibold text-gray-300 hover:text-white hover:bg-white/[0.1] transition-colors flex items-center gap-2"
+                      className="md:hidden flex flex-col items-center justify-center p-2 rounded-xl bg-white/[0.05] border border-white/[0.1] active:scale-95 transition-transform"
                     >
-                      🎙️ {activeReciterMeta?.label.split(' ')[0]}
+                      <span className="text-lg">🎙️</span>
+                      <span className="text-[8px] font-bold text-gray-400 mt-1 uppercase">Settings</span>
                     </button>
+                  </div>
 
-                    <select
-                      value={playbackRate}
-                      onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
-                      className="border text-xs rounded-lg px-2 py-1.5 bg-white/10 border-white/20 text-white focus:outline-none"
-                    >
-                      <option value={0.75}>0.75×</option>
-                      <option value={1}>1×</option>
-                      <option value={1.5}>1.5×</option>
-                      <option value={2}>2×</option>
-                    </select>
+                  {/* Controls Row */}
+                  <div className="flex flex-col md:flex-row items-center w-full md:w-auto gap-4">
+                    {/* Time & Playback Controls */}
+                    <div className="flex items-center justify-between w-full md:w-auto md:gap-6">
+                      <span className={`text-[10px] md:text-xs font-mono font-medium ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                        {formatTime(currentTime)}
+                      </span>
 
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-gray-400">🔊</span>
-                      <input type="range" min="0" max="100" value={volume} onChange={(e) => setVolume(parseInt(e.target.value))} className="w-16 accent-islamic-gold" />
+                      <div className="flex items-center gap-4 md:gap-3">
+                        <button onClick={playPrevAyah} className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:bg-white/10 active:scale-90 transition-all text-xl">
+                          ⏮
+                        </button>
+                        <button
+                          onClick={() => setIsPlaying(!isPlaying)}
+                          className="w-14 h-14 rounded-full bg-gradient-to-br from-islamic-gold to-amber-500 shadow-[0_0_15px_rgba(212,175,55,0.4)] flex items-center justify-center text-black text-2xl active:scale-90 transition-transform"
+                        >
+                          {isLoading ? <span className="animate-spin">⟳</span> : isPlaying ? '⏸' : '▶'}
+                        </button>
+                        <button onClick={playNextAyah} className="w-10 h-10 flex items-center justify-center rounded-full text-white hover:bg-white/10 active:scale-90 transition-all text-xl">
+                          ⏭
+                        </button>
+                      </div>
+
+                      <span className={`text-[10px] md:text-xs font-mono font-medium ${isLight ? 'text-gray-500' : 'text-gray-400'}`}>
+                        {formatTime(duration)}
+                      </span>
+                    </div>
+
+                    {/* Desktop Only: Volume & Speed & Reciter */}
+                    <div className="hidden md:flex items-center gap-3">
+                      <button
+                        onClick={() => setShowSettingsModal(true)}
+                        className="px-3 py-1.5 rounded-lg bg-white/[0.05] border border-white/[0.1] text-xs font-semibold text-gray-300 hover:text-white hover:bg-white/[0.1] transition-colors flex items-center gap-2"
+                      >
+                        🎙️ {activeReciterMeta?.label.split(' ')[0]}
+                      </button>
+
+                      <select
+                        value={playbackRate}
+                        onChange={(e) => setPlaybackRate(parseFloat(e.target.value))}
+                        className="border text-xs rounded-lg px-2 py-1.5 bg-white/10 border-white/20 text-white focus:outline-none"
+                      >
+                        <option value={0.75}>0.75×</option>
+                        <option value={1}>1×</option>
+                        <option value={1.5}>1.5×</option>
+                        <option value={2}>2×</option>
+                      </select>
+
+                      <div className="flex items-center gap-2">
+                        <span className="text-xs text-gray-400">🔊</span>
+                        <input type="range" min="0" max="100" value={volume} onChange={(e) => setVolume(parseInt(e.target.value))} className="w-16 accent-islamic-gold" />
+                      </div>
                     </div>
                   </div>
-                </div>
 
+                </div>
               </div>
-            </div>
             </motion.div>
           </>
         )}
@@ -247,11 +247,10 @@ export const GlobalAudioPlayer: React.FC = () => {
                         <button
                           key={speed}
                           onClick={() => setPlaybackRate(speed)}
-                          className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all border ${
-                            playbackRate === speed 
-                              ? 'bg-islamic-gold text-black border-islamic-gold shadow-md' 
-                              : (isLight ? 'bg-white text-slate-600 border-slate-200 hover:bg-slate-100' : 'bg-transparent text-gray-400 border-white/[0.1] hover:bg-white/[0.05]')
-                          }`}
+                          className={`flex-1 py-2 rounded-lg text-xs font-bold transition-all border ${playbackRate === speed
+                            ? 'bg-islamic-gold text-black border-islamic-gold shadow-md'
+                            : (isLight ? 'bg-white text-slate-600 border-slate-200 hover:bg-slate-100' : 'bg-transparent text-gray-400 border-white/[0.1] hover:bg-white/[0.05]')
+                            }`}
                         >
                           {speed}x
                         </button>
@@ -274,17 +273,15 @@ export const GlobalAudioPlayer: React.FC = () => {
                         <button
                           key={id}
                           onClick={() => setReciter(id as AudioReciter)}
-                          className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all border ${
-                            isActive 
-                              ? (isLight ? 'bg-emerald-50 border-emerald-200' : 'bg-teal-500/10 border-teal-500/30')
-                              : (isLight ? 'bg-white border-slate-200 hover:bg-slate-50' : 'bg-white/[0.03] border-transparent hover:bg-white/[0.06]')
-                          }`}
+                          className={`w-full flex items-center gap-3 p-3 rounded-xl transition-all border ${isActive
+                            ? (isLight ? 'bg-emerald-50 border-emerald-200' : 'bg-teal-500/10 border-teal-500/30')
+                            : (isLight ? 'bg-white border-slate-200 hover:bg-slate-50' : 'bg-white/[0.03] border-transparent hover:bg-white/[0.06]')
+                            }`}
                         >
-                          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${
-                            isActive 
-                              ? 'bg-islamic-gold text-black shadow-md' 
-                              : (isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/10 text-gray-400')
-                          }`}>
+                          <div className={`w-10 h-10 rounded-full flex items-center justify-center text-sm font-bold ${isActive
+                            ? 'bg-islamic-gold text-black shadow-md'
+                            : (isLight ? 'bg-slate-100 text-slate-500' : 'bg-white/10 text-gray-400')
+                            }`}>
                             {meta.label.charAt(0)}
                           </div>
                           <div className="flex-1 text-left">
