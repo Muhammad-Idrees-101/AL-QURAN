@@ -234,7 +234,7 @@ export function QuranPlayerContent({ surah, ayahs, initialAyah }: Props) {
         </div>
       </section>
       {/* ── Floating Controls ── */}
-      <FloatingControls />
+      {/* <FloatingControls /> */}
     </div>
   );
 }
