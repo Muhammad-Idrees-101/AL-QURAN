@@ -63,16 +63,8 @@ export function QuranPlayerContent({ surah, ayahs, initialAyah }: Props) {
       >
         {/* ── MOBILE HEADER (< md) ── */}
         <div className="md:hidden px-4 py-3">
-          {/* Row 1: Back + Title + Arabic */}
+          {/* Row 1: Title + Arabic */}
           <div className="flex items-center gap-2 mb-2.5">
-            <Link href="/" className="shrink-0" aria-label="Back to home">
-              <motion.span
-                whileTap={{ scale: 0.95 }}
-                className="w-8 h-8 rounded-full bg-white/[0.08] border border-white/[0.1] flex items-center justify-center text-gray-400 hover:text-white transition-colors cursor-pointer"
-              >
-                ←
-              </motion.span>
-            </Link>
             <div className="flex items-center gap-2 min-w-0 flex-1">
               <h1 className={`text-lg font-bold truncate transition-colors ${isLight ? 'text-gray-900' : 'text-white'}`}>
                 {surah.name_english}
