@@ -226,4 +226,4 @@ Global Audio Player: Access a vast library of world-renowned Qaris with dynamic 
 Adaptive Themes: High-contrast White, Dark, and Sepia modes with an elegant, theme-responsive 'Allah' calligraphy background.
 
 Security First: Architected with strict Environment Variable management to ensure 100% protection of API secrets.
->>>>>>> 60877cc10da72cb141aee76c608392268524058b
+>>>>>>> 
