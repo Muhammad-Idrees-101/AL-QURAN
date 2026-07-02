@@ -67,7 +67,9 @@
 
   /* Theme-aware backgrounds */
   .theme-nav-bg {
-    @apply bg-gradient-to-b min-[1200px]:bg-gradient-to-r from-[#0D2620]/95 to-[#112240]/95;
+    /* lg = vertical sidebar: fully opaque so page gradient doesn't bleed through */
+    /* min-[1200px] = top bar: gradient direction changes, slight transparency is fine */
+    @apply bg-gradient-to-b min-[1200px]:bg-gradient-to-r from-[#0D2620] to-[#112240] min-[1200px]:from-[#0D2620]/95 min-[1200px]:to-[#112240]/95;
   }
 
   .theme-sticky-header {

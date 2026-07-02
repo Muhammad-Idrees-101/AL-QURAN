@@ -202,7 +202,8 @@ export default function RootLayout({
 
             {/* Main Content Area */}
             <main className="flex-1 lg:ml-64 min-[1200px]:ml-0 min-[1200px]:pt-20 min-h-screen flex flex-col">
-              <div className="flex-1 pb-24 lg:pb-8">
+              {/* top padding: mobile=64px header, tablet=64px header, desktop=sidebar (no top pad needed) */}
+              <div className="flex-1 pt-16 lg:pt-0 pb-24 lg:pb-8">
                 {children}
               </div>
               <Footer />

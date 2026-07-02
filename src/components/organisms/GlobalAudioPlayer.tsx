@@ -92,8 +92,11 @@ export const GlobalAudioPlayer: React.FC = () => {
               transition={{ type: 'spring', damping: 28, stiffness: 220 }}
               exit={{ y: 200, opacity: 0 }}
               className={cn(
-                "fixed left-0 right-0 z-40 md:bottom-0 transition-all duration-300",
-                pathname.startsWith('/player') ? "bottom-0" : "bottom-[72px]"
+                "fixed left-0 right-0 z-40 transition-all duration-300",
+                // lg+ = desktop sidebar, no bottom nav → sit at absolute bottom
+                // mobile + tablet (< lg) = mobile/tablet bottom nav at 72px → player sits above it,
+                //   EXCEPT on the /player page where the bottom nav is hidden
+                pathname.startsWith('/player') ? "bottom-0" : "bottom-[72px] lg:bottom-0"
               )}
             >
               {/* ── Toggle Tab ── */}

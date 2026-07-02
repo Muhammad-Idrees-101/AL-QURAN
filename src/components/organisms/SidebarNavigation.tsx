@@ -49,7 +49,7 @@ export const SidebarNavigation: React.FC = () => {
       ========================================= */}
       <div className="lg:hidden">
         {/* Mobile Top Header */}
-        <header id="mobile-header" role="banner" aria-label="Al-Quran Interactive mobile navigation" className="fixed top-0 left-0 right-0 h-16 z-40 bg-black/40 backdrop-blur-xl border-b border-white/[0.08] flex items-center justify-between px-4">
+        <header id="mobile-header" role="banner" aria-label="Al-Quran Interactive mobile navigation" className="fixed top-0 left-0 right-0 h-16 z-40 bg-[#0D2620]/95 md:bg-[#0D2620] backdrop-blur-xl md:backdrop-blur-none border-b border-white/[0.08] flex items-center justify-between px-4">
           <Link href="/" aria-label="Al-Quran Interactive home" className="flex items-center gap-2">
             <div className="w-8 h-8 rounded-lg overflow-hidden relative">
               <Image src="/logo.png" alt="Al-Quran Interactive Logo" fill className="object-cover" priority />
@@ -176,7 +176,7 @@ export const SidebarNavigation: React.FC = () => {
           id="mobile-bottom-nav"
           aria-label="Mobile bottom navigation"
           className={cn(
-            "fixed bottom-0 left-0 right-0 h-[72px] z-40 bg-black/90 backdrop-blur-xl border-t border-white/[0.08] flex items-center justify-around px-2 transition-transform duration-300",
+            "fixed bottom-0 left-0 right-0 h-[72px] z-40 bg-black/90 md:bg-[#0A1118] backdrop-blur-xl md:backdrop-blur-none border-t border-white/[0.08] flex items-center justify-around px-2 transition-transform duration-300",
             pathname.startsWith('/player') ? "translate-y-full" : "translate-y-0"
           )}
         >
@@ -237,10 +237,10 @@ export const SidebarNavigation: React.FC = () => {
           DESKTOP LAYOUT (Hidden on < lg)
       ========================================= */}
       <motion.div
-        className="hidden lg:flex fixed left-0 top-0 h-screen w-64 z-40 min-[1200px]:h-20 min-[1200px]:w-full min-[1200px]:flex-col"
+        className="hidden lg:flex fixed left-0 top-0 h-screen w-64 z-40 min-[1200px]:h-20 min-[1200px]:w-full min-[1200px]:flex-col overflow-hidden"
         initial={false}
       >
-        <div className="h-full theme-nav-bg backdrop-blur-xl border-r min-[1200px]:border-r-0 min-[1200px]:border-b border-white/[0.08] flex flex-col min-[1200px]:flex-row px-4 py-6 min-[1200px]:py-0 min-[1200px]:px-8 min-[1200px]:items-center overflow-y-auto min-[1200px]:overflow-visible">
+        <div className="h-full theme-nav-bg min-[1200px]:backdrop-blur-xl border-r min-[1200px]:border-r-0 min-[1200px]:border-b border-white/[0.08] flex flex-col min-[1200px]:flex-row px-4 py-6 min-[1200px]:py-0 min-[1200px]:px-8 min-[1200px]:items-center overflow-y-auto min-[1200px]:overflow-visible">
           {/* Logo */}
           <Link href="/">
             <div className="flex items-center gap-3 mb-8 min-[1200px]:mb-0 min-[1200px]:mr-8 px-2 min-[1200px]:px-0 cursor-pointer group shrink-0">

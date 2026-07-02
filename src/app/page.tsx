@@ -49,12 +49,12 @@ export default function HomePage() {
   const progressPct = Math.round((readSurahs.length / 114) * 100);
 
   return (
-    <div>
+    <div className="overflow-x-hidden bg-transparent">
       {/* ── Hero Section ── */}
       <section className="relative px-4 md:px-8 pt-24 pb-10 md:pt-28 md:pb-16 overflow-hidden flex flex-col items-center justify-center min-h-[85vh]">
 
-        {/* Ambient Glows */}
-        <div className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[900px] md:h-[900px] theme-hero-glow blur-[140px] rounded-full pointer-events-none" />
+        {/* Ambient Glows — capped at 600px on tablet to prevent horizontal overflow */}
+        <div className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] md:w-[600px] md:h-[600px] lg:w-[900px] lg:h-[900px] theme-hero-glow blur-[140px] rounded-full pointer-events-none" />
         <div className="absolute top-[60%] left-1/4 w-[300px] h-[300px] bg-amber-500/5 blur-[100px] rounded-full pointer-events-none" />
         <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-[300px] theme-hero-fade pointer-events-none" />
 
@@ -149,7 +149,8 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      <section className="px-4 md:px-8 pb-20 space-y-12">
+      {/* Below-fold sections — explicit background so sidebar gradient doesn't bleed through on tablets */}
+      <section className="px-4 md:px-8 pb-20 space-y-12 bg-transparent">
         {/* Jump Back In */}
         <ContinuationCard />
 
