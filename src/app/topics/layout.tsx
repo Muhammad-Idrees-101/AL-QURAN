@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
+import { BASE_URL, OG_IMAGE, SITE_NAME } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Browse Surahs by Topic',
+  title: 'Browse Quran by Topic — Prayer, Patience, Prophets, Jannah & More',
   description:
-    'Discover Quranic Surahs organized by theme: Prayer, Patience, Prophets, Jannah, Tawhid, Forgiveness, Family, Creation, The Hereafter, and more. A thematic guide to the Holy Quran.',
-  alternates: { canonical: 'https://al-quran-interactive.com/topics' },
+    'Explore Quranic verses organized by topic — Prayer, Patience, Prophets, Jannah, Tawhid, Forgiveness, and more.',
+  alternates: { canonical: `${BASE_URL}/topics` },
   keywords: [
     'Quran topics',
     'Surahs about prayer',
@@ -13,19 +14,24 @@ export const metadata: Metadata = {
     'Surahs about prophets',
     'Quran by topic',
     'thematic Quran guide',
+    'Quran patience',
+    'Quran Tawhid',
+    'Quran forgiveness',
   ],
   openGraph: {
-    title: 'Browse Surahs by Topic — Al-Quran Interactive',
+    title: 'Browse Quran by Topic — Prayer, Patience, Prophets, Jannah & More',
     description:
-      'Find Surahs by theme — Prayer, Patience, Prophets, Jannah, Forgiveness, and 8 more topics. A thematic guide to the Holy Quran.',
-    url: 'https://al-quran-interactive.com/topics',
+      'Explore Quranic verses organized by topic — Prayer, Patience, Prophets, Jannah, Tawhid, Forgiveness, and more.',
+    url: `${BASE_URL}/topics`,
+    siteName: SITE_NAME,
     type: 'website',
-    images: [{ url: 'https://al-quran-interactive.com/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Al-Quran Interactive — Your Spiritual Knowledge Hub' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Browse Surahs by Topic — Al-Quran Interactive',
+    title: 'Browse Quran by Topic — Prayer, Patience, Prophets, Jannah & More',
     description: 'Find Surahs by theme: Prayer, Prophets, Jannah, Forgiveness, and more.',
+    images: [OG_IMAGE],
   },
 };
 

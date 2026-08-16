@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import Script from 'next/script';
 import { Button, Badge } from '@/components/atoms';
 import { SURAHS, TAFSEERS, getTafseerContent } from '@/lib/mockData';
 import { useSettingsStore } from '@/stores/settingsStore';
@@ -146,11 +147,30 @@ export default function TafseerPage() {
 
   return (
     <div className="flex flex-col min-h-screen pt-16 lg:pt-0 pb-24 lg:pb-0">
+      {/* JSON-LD Video Schema */}
+      {israrVideo && (
+        <Script
+          id={`tafseer-video-schema-${selectedSurah}`}
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "VideoObject",
+              "name": `Surah ${israrVideo.surahName} Tafseer — Dr. Israr Ahmed`,
+              "description": `Detailed Bayan-ul-Quran explanation of Surah ${israrVideo.surahName}, Lecture ${israrVideo.lectureNumber}.`,
+              "thumbnailUrl": "https://upload.wikimedia.org/wikipedia/en/2/2f/Dr.Israr_Ahmed.jpg",
+              "uploadDate": "2024-01-01T08:00:00+08:00",
+              "contentUrl": israrVideo.videoUrl
+            })
+          }}
+        />
+      )}
       {/* Mobile Top App Bar (Replaces Desktop Sticky Header on Mobile & Tablet) */}
       <div className="lg:hidden fixed top-16 left-0 right-0 z-30 bg-[#0d2620]/92 backdrop-blur-xl border-b border-teal-500/10 p-3 flex flex-col gap-3">
         <div className="flex justify-between items-center">
           <div>
-            <h1 className="text-base font-bold text-white leading-tight">Tafseer Library</h1>
+            {/* SEO H1: visually styled as compact header title */}
+            <p className="text-base font-bold text-white leading-tight" aria-hidden="true">Quran Tafseer</p>
             <p className="text-[10px] text-teal-500">{surah?.name_english} • Surah {selectedSurah}</p>
           </div>
           <Button variant="glass" size="sm" onClick={() => setReadingLanguage(isUrdu ? 'en' : 'ur')}>
@@ -204,7 +224,7 @@ export default function TafseerPage() {
             <button onClick={() => router.push('/')} className="text-xs text-gray-500 hover:text-white mb-2 flex items-center gap-1">
               ← Back
             </button>
-            <h1 className="text-3xl font-bold text-white">Tafseer Library</h1>
+            <h1 className="text-3xl font-bold text-white">Quran Tafseer & Commentary</h1>
             <p className="text-xs text-gray-400">Academic study of the Quran</p>
           </div>
           <div className="flex gap-2">
@@ -280,7 +300,7 @@ export default function TafseerPage() {
               <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
                 <div className="flex justify-between items-start md:items-center w-full md:w-auto">
                   <div>
-                    <h2 className="text-xl md:text-2xl font-bold text-white">{surah.name_english}</h2>
+                    <h2 className="text-xl md:text-2xl font-bold text-white">Browse Tafseer by Surah</h2>
                     <h3 className="text-lg md:text-xl font-arabic text-islamic-gold mt-1">{surah.name_arabic}</h3>
                   </div>
                   {/* Mobile Badge View */}
@@ -336,6 +356,11 @@ export default function TafseerPage() {
             </motion.div>
           )}
 
+          {/* Tafseer Methodology — semantic H2 for SEO */}
+          {activeTafsir && (
+            <h2 className="sr-only">Tafseer Methodology — {activeTafsir.name}</h2>
+          )}
+
           {/* Tafsir Meta */}
           {activeTafsir && (
             <div className="mb-6 flex flex-wrap items-center gap-2 text-[10px] md:text-xs text-gray-500 border-b border-white/[0.05] pb-4">
@@ -377,6 +402,8 @@ export default function TafseerPage() {
                   ? "bg-white border-gray-200 shadow-md" 
                   : "bg-gradient-to-br from-[#0d2d24] via-[#0d2035] to-[#112240] border-teal-500/20 shadow-xl"
               )}>
+                {/* Recent Tafseer Additions — Key Insights panel */}
+                <h2 className="sr-only">Recent Tafseer Additions</h2>
                 {/* Decorative background blur (only in dark mode) */}
                 {(!isLight && mounted) && <div className="absolute top-0 right-0 w-32 h-32 bg-teal-500/10 blur-[50px] rounded-full pointer-events-none" />}
 

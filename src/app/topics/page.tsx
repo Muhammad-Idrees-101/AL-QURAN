@@ -37,7 +37,7 @@ export default function TopicsPage() {
         <button onClick={() => router.push('/')} className="hidden md:flex text-xs text-gray-500 hover:text-white mb-4 items-center gap-1 transition-colors">
           ← Back
         </button>
-        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">📂 Topics</h1>
+        <h1 className="text-2xl md:text-3xl font-bold text-white mb-2">Browse Quran by Topic</h1>
         <p className="text-sm text-gray-400 mb-6">Browse Surahs by theme and subject</p>
       </motion.div>
 
@@ -56,6 +56,8 @@ export default function TopicsPage() {
             }`}
           >
             <div className="text-2xl mb-2">{topic.icon}</div>
+            {/* sr-only H2 for each topic — crawlable semantic heading */}
+            <h2 className="sr-only">{topic.label}</h2>
             <h3 className="text-sm font-semibold text-white leading-snug">{topic.label}</h3>
             <p className="text-[10px] text-gray-400 mt-1">{topic.surahs.length} Surahs</p>
           </motion.button>

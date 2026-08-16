@@ -36,7 +36,7 @@ export const metadata: Metadata = {
     template: '%s | Al-Quran Interactive',
   },
   description:
-    'Al-Quran Interactive is a premium Islamic platform for reading all 114 Surahs with translations, audio recitation, Tafseer by Ibn Kathir & scholars, Islamic Duas, and video lectures by Dr. Israr Ahmed, Mufti Menk, and Nouman Ali Khan.',
+    'Read all 114 Surahs with English & Urdu translation, audio recitation, Tafseer by Ibn Kathir, authentic Duas, and video lectures by Dr. Israr Ahmed, Mufti Menk & Nouman Ali Khan.',
   keywords: [
     'Quran online',
     'read Quran',
@@ -71,11 +71,13 @@ export const metadata: Metadata = {
     },
   },
   alternates: {
+    // No trailing slash on canonical
     canonical: BASE_URL,
-    languages: {
-      'en-US': `${BASE_URL}/en`,
-      'ur-PK': `${BASE_URL}/ur`,
-    },
+    // hreflang: enable when /ur/* URL paths are live
+    // languages: {
+    //   'en-US': `${BASE_URL}`,
+    //   'ur-PK': `${BASE_URL}/ur`,
+    // },
   },
   openGraph: {
     type: 'website',
@@ -84,7 +86,7 @@ export const metadata: Metadata = {
     siteName: 'Al-Quran Interactive',
     title: 'Al-Quran Interactive — Read, Listen & Study the Quran Online',
     description:
-      'Explore all 114 Surahs with English & Urdu translations, audio recitation, deep Tafseer, Islamic Duas, and scholarly video lectures — all in one premium platform.',
+      'Read all 114 Surahs with English & Urdu translation, audio recitation, Tafseer by Ibn Kathir, authentic Duas, and video lectures by Dr. Israr Ahmed, Mufti Menk & Nouman Ali Khan.',
     images: [
       {
         url: `${BASE_URL}/og-image.png`,
@@ -141,9 +143,9 @@ export default function RootLayout({
           '@type': 'SearchAction',
           target: {
             '@type': 'EntryPoint',
-            urlTemplate: `${BASE_URL}/player/{surah_id}`,
+            urlTemplate: `${BASE_URL}/player/{search_term_string}`,
           },
-          'query-input': 'required name=surah_id',
+          'query-input': 'required name=search_term_string',
         },
         inLanguage: ['en-US', 'ur-PK'],
       },

@@ -3,8 +3,7 @@ import type { Metadata } from 'next';
 import { SURAHS } from '@/lib/mockData';
 import { Ayah } from '@/types/quran';
 import { QuranPlayerContent } from './content';
-
-const BASE_URL = 'https://al-quran-interactive.com';
+import { BASE_URL, OG_IMAGE, SITE_NAME } from '@/lib/seo';
 
 // SSG: Generate static params for all 114 Surahs
 export function generateStaticParams() {
@@ -27,8 +26,9 @@ export async function generateMetadata({
     };
   }
 
-  const title = `Surah ${surah.name_english} (${surah.name_arabic}) \u2014 Read & Listen Online`;
-  const description = `Read Surah ${surah.name_english} (#${surah.id}) online with English & Urdu translation, Tafseer, and audio recitation. ${surah.ayah_count} Ayahs \u2014 ${surah.revelation_type} revelation.`;
+  const revelationType = surah.revelation_type === 'Meccan' ? 'Meccan' : 'Medinan';
+  const title = `Surah ${surah.name_english} (${surah.name_arabic}) — Read Online with Translation & Audio | ${SITE_NAME}`;
+  const description = `Read and listen to Surah ${surah.name_english}, a ${revelationType} Surah with ${surah.ayah_count} Ayahs. English & Urdu translation, audio recitation, word-by-word Tafseer.`;
   const canonicalUrl = `${BASE_URL}/player/${surah.id}`;
 
   return {
@@ -39,15 +39,15 @@ export async function generateMetadata({
       title,
       description,
       url: canonicalUrl,
-      siteName: 'Al-Quran Interactive',
+      siteName: SITE_NAME,
       type: 'article',
       locale: 'en_US',
       images: [
         {
-          url: `${BASE_URL}/og-image.png`,
+          url: OG_IMAGE,
           width: 1200,
           height: 630,
-          alt: `Surah ${surah.name_english} \u2014 Al-Quran Interactive`,
+          alt: `Surah ${surah.name_english} Quran online reading`,
         },
       ],
     },
@@ -55,7 +55,7 @@ export async function generateMetadata({
       card: 'summary_large_image',
       title,
       description,
-      images: [`${BASE_URL}/og-image.png`],
+      images: [OG_IMAGE],
     },
   };
 }
@@ -131,5 +131,33 @@ export default function QuranPlayerPage({ params, searchParams }: PageProps) {
   const ayahs = generateAyahs(surah.id);
   const ayahParam = typeof searchParams.ayah === 'string' ? parseInt(searchParams.ayah) : 1;
 
-  return <QuranPlayerContent surah={surah} ayahs={ayahs} initialAyah={ayahParam || 1} />;
+  // BreadcrumbList JSON-LD for Surah pages
+  const breadcrumbJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    itemListElement: [
+      {
+        '@type': 'ListItem',
+        position: 1,
+        name: 'Home',
+        item: BASE_URL,
+      },
+      {
+        '@type': 'ListItem',
+        position: 2,
+        name: `Surah ${surah.name_english}`,
+        item: `${BASE_URL}/player/${surah.id}`,
+      },
+    ],
+  };
+
+  return (
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbJsonLd) }}
+      />
+      <QuranPlayerContent surah={surah} ayahs={ayahs} initialAyah={ayahParam || 1} />
+    </>
+  );
 }

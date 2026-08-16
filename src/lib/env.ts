@@ -25,7 +25,7 @@ export const env: EnvSchema = {
   NEXT_PUBLIC_QURAN_API: process.env.NEXT_PUBLIC_QURAN_API || 'https://api.alquran.cloud',
   NEXT_PUBLIC_API_URL: process.env.NEXT_PUBLIC_API_URL || 'https://api.example.com',
   NEXT_PUBLIC_AUDIO_CDN: process.env.NEXT_PUBLIC_AUDIO_CDN || 'https://everyayah.com/data',
-  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://al-quran-beige.vercel.app/',
+  NEXT_PUBLIC_SITE_URL: process.env.NEXT_PUBLIC_SITE_URL || 'https://al-quran-beige.vercel.app',
   NEXT_PUBLIC_ENV: (process.env.NEXT_PUBLIC_ENV as any) || 'development',
 
   // Private variables should only be accessed on the server

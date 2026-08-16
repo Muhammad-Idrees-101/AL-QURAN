@@ -1,10 +1,11 @@
 import type { Metadata } from 'next';
+import { BASE_URL, OG_IMAGE, SITE_NAME } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Islamic Duas Collection',
+  title: 'Authentic Islamic Duas — Daily Supplications with Translation',
   description:
-    'Browse authentic Islamic supplications (Duas) from the Quran and Sunnah. Morning & evening adhkar, Salah duas, travel, food, sleep, forgiveness, and anxiety — with Arabic, transliteration, and Urdu translation.',
-  alternates: { canonical: 'https://al-quran-interactive.com/duas' },
+    'Browse authentic Duas (supplications) from Quran and Sunnah with Arabic text, transliteration, and English/Urdu translation.',
+  alternates: { canonical: `${BASE_URL}/duas` },
   keywords: [
     'Islamic duas',
     'morning duas',
@@ -15,19 +16,22 @@ export const metadata: Metadata = {
     'authentic duas',
     'duas from Quran',
     'duas from Sunnah',
+    'daily supplications',
   ],
   openGraph: {
-    title: 'Islamic Duas Collection — Al-Quran Interactive',
+    title: 'Authentic Islamic Duas — Daily Supplications with Translation',
     description:
-      'Authentic supplications from the Quran & Sunnah — morning adhkar, Salah, travel, forgiveness, and more with Arabic, transliteration, and Urdu translation.',
-    url: 'https://al-quran-interactive.com/duas',
+      'Browse authentic Duas (supplications) from Quran and Sunnah with Arabic text, transliteration, and English/Urdu translation.',
+    url: `${BASE_URL}/duas`,
+    siteName: SITE_NAME,
     type: 'website',
-    images: [{ url: 'https://al-quran-interactive.com/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Al-Quran Interactive — Your Spiritual Knowledge Hub' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Islamic Duas Collection — Al-Quran Interactive',
+    title: 'Authentic Islamic Duas — Daily Supplications with Translation',
     description: 'Authentic supplications from Quran & Sunnah with Arabic, transliteration, and translation.',
+    images: [OG_IMAGE],
   },
 };
 

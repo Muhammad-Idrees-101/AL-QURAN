@@ -65,6 +65,8 @@ export function QuranPlayerContent({ surah, ayahs, initialAyah }: Props) {
         <div className="md:hidden px-4 py-3">
           {/* Row 1: Title + Arabic */}
           <div className="flex items-center gap-2 mb-2.5">
+            {/* Semantic H2 for Audio Controls */}
+            <h2 className="sr-only">Audio Recitation Controls</h2>
             <div className="flex items-center gap-2 min-w-0 flex-1">
               <h1 className={`text-lg font-bold truncate transition-colors ${isLight ? 'text-gray-900' : 'text-white'}`}>
                 {surah.name_english}
@@ -216,6 +218,8 @@ export function QuranPlayerContent({ surah, ayahs, initialAyah }: Props) {
 
       {/* Navigation between Surahs */}
       <section className="px-4 md:px-8 py-8 border-t border-white/[0.06]">
+        {/* Semantic H2 for Navigation */}
+        <h2 className="sr-only">Surah Navigation</h2>
         <div className="max-w-4xl mx-auto flex justify-between">
           {prevSurah ? (
             <Link href={`/player/${prevSurah.id}`}>

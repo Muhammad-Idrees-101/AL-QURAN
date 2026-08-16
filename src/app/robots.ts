@@ -1,4 +1,5 @@
 import type { MetadataRoute } from 'next';
+import { BASE_URL } from '@/lib/seo';
 
 export default function robots(): MetadataRoute.Robots {
   return {
@@ -6,7 +7,8 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: '*',
         allow: '/',
-        disallow: ['/api/private', '/admin'],
+        // Bookmarks is user-specific — no value for crawlers
+        disallow: ['/bookmarks', '/api/private', '/admin'],
       },
       {
         // Block AI training bots
@@ -14,7 +16,6 @@ export default function robots(): MetadataRoute.Robots {
         disallow: '/',
       },
     ],
-    sitemap: 'https://al-quran-interactive.com/sitemap.xml',
-    host: 'https://al-quran-interactive.com',
+    sitemap: `${BASE_URL}/sitemap.xml`,
   };
 }

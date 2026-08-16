@@ -379,7 +379,7 @@ export default function DuasPage() {
           </button>
           <div className="flex-1 min-w-0">
             <h1 className="text-xl md:text-2xl font-bold text-white leading-tight flex items-center gap-2">
-              💧 <span>Duas Collection</span>
+              🤲 <span>Authentic Duas & Supplications</span>
             </h1>
             <p className="text-[11px] text-gray-500 mt-0.5">Authentic supplications · Quran & Sunnah</p>
           </div>

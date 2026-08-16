@@ -1,22 +1,26 @@
 import type { Metadata } from 'next';
+import { BASE_URL, OG_IMAGE, SITE_NAME } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Tafseer Library',
+  title: 'Quran Tafseer Online — Ibn Kathir Commentary & Scholar Explanations',
   description:
-    'Explore in-depth Quranic commentary (Tafseer) from Ibn Kathir, Jalalayn, Maariful Quran, and more. Read scholarly interpretations of all 114 Surahs in English and Urdu.',
-  alternates: { canonical: 'https://al-quran-interactive.com/tafseer' },
+    'Explore in-depth Tafseer (Quran commentary) by Ibn Kathir and renowned scholars, Surah by Surah, with audio and video lectures.',
+  alternates: { canonical: `${BASE_URL}/tafseer` },
   openGraph: {
-    title: 'Tafseer Library — Al-Quran Interactive',
+    title: 'Quran Tafseer Online — Ibn Kathir Commentary & Scholar Explanations',
     description:
-      'Deep academic study of the Quran. Read Tafseer Ibn Kathir, Maariful Quran, and classical commentary for all 114 Surahs.',
-    url: 'https://al-quran-interactive.com/tafseer',
+      'Explore in-depth Tafseer (Quran commentary) by Ibn Kathir and renowned scholars, Surah by Surah, with audio and video lectures.',
+    url: `${BASE_URL}/tafseer`,
+    siteName: SITE_NAME,
     type: 'website',
-    images: [{ url: 'https://al-quran-interactive.com/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Al-Quran Interactive — Your Spiritual Knowledge Hub' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Tafseer Library — Al-Quran Interactive',
-    description: 'Deep Quranic commentary from Ibn Kathir and classical scholars for all 114 Surahs.',
+    title: 'Quran Tafseer Online — Ibn Kathir Commentary & Scholar Explanations',
+    description:
+      'Deep Quranic commentary from Ibn Kathir and classical scholars for all 114 Surahs.',
+    images: [OG_IMAGE],
   },
 };
 

@@ -117,7 +117,7 @@ export const GlobalAudioPlayer: React.FC = () => {
                 onTimeUpdate={() => audioRef.current && setCurrentTime(audioRef.current.currentTime)}
                 onLoadedMetadata={() => audioRef.current && setDuration(audioRef.current.duration)}
                 onEnded={playNextAyah}
-                preload="auto"
+                preload="none"
               />
 
               <div className={`pt-4 pb-4 px-4 md:px-6 backdrop-blur-3xl transition-colors duration-500 shadow-[0_-10px_30px_rgba(0,0,0,0.5)] ${isLight ? 'bg-white/95 border-t border-gray-200' : 'bg-[#0A1118]/95 border-t border-white/[0.08]'}`}>

@@ -1,22 +1,26 @@
 import type { Metadata } from 'next';
+import { BASE_URL, OG_IMAGE, SITE_NAME } from '@/lib/seo';
 
 export const metadata: Metadata = {
-  title: 'Video Academy',
+  title: 'Islamic Academy — Video Lectures by Dr. Israr Ahmed, Mufti Menk, Nouman Ali Khan',
   description:
-    'Watch guided Quran lectures from elite Islamic scholars including Dr. Israr Ahmed (Bayan-ul-Quran), Mufti Tariq Masood, Mufti Menk, and Nouman Ali Khan. Over 270+ video episodes.',
-  alternates: { canonical: 'https://al-quran-interactive.com/academy' },
+    'Watch Bayan-ul-Quran and Tafseer video lectures from world-class scholars including Dr. Israr Ahmed, Mufti Menk, and Nouman Ali Khan.',
+  alternates: { canonical: `${BASE_URL}/academy` },
   openGraph: {
-    title: 'Video Academy — Al-Quran Interactive',
+    title: 'Islamic Academy — Video Lectures by Dr. Israr Ahmed, Mufti Menk, Nouman Ali Khan',
     description:
-      'Master the Quran with 270+ guided lectures from world-renowned scholars. Watch Tafseer, Stories of Prophets, and linguistic analysis.',
-    url: 'https://al-quran-interactive.com/academy',
+      'Watch Bayan-ul-Quran and Tafseer video lectures from world-class scholars including Dr. Israr Ahmed, Mufti Menk, and Nouman Ali Khan.',
+    url: `${BASE_URL}/academy`,
+    siteName: SITE_NAME,
     type: 'website',
-    images: [{ url: 'https://al-quran-interactive.com/og-image.png', width: 1200, height: 630 }],
+    images: [{ url: OG_IMAGE, width: 1200, height: 630, alt: 'Al-Quran Interactive — Your Spiritual Knowledge Hub' }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Video Academy — Al-Quran Interactive',
-    description: 'Master the Quran with 270+ guided lectures from world-renowned scholars.',
+    title: 'Islamic Academy — Video Lectures by Dr. Israr Ahmed, Mufti Menk, Nouman Ali Khan',
+    description:
+      'Watch Bayan-ul-Quran and Tafseer lectures from Dr. Israr Ahmed, Mufti Menk, and Nouman Ali Khan.',
+    images: [OG_IMAGE],
   },
 };
 

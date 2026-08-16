@@ -3,6 +3,7 @@
 import React, { useState, useCallback } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useRouter } from 'next/navigation';
+import Script from 'next/script';
 import { Button, Badge } from '@/components/atoms';
 import { SURAHS } from '@/lib/mockData';
 import { cn } from '@/utils/cn';
@@ -98,7 +99,7 @@ export default function AcademyPage() {
         <button onClick={() => router.push('/')} className="text-xs text-gray-500 hover:text-white mb-3 flex items-center gap-1 transition-colors">
           ← Back
         </button>
-        <h1 className="text-3xl md:text-5xl font-bold text-white mb-2 tracking-tight">Video <span className="gradient-text-gold">Academy</span></h1>
+        <h1 className="text-3xl md:text-5xl font-bold text-white mb-2 tracking-tight">Learn from <span className="gradient-text-gold">Renowned Islamic Scholars</span></h1>
         <p className="text-gray-400 text-sm md:text-lg">Master the Quran with guided lectures from elite scholars.</p>
       </motion.section>
 
@@ -185,6 +186,13 @@ export default function AcademyPage() {
 
       {/* Video Grid */}
       <section className="px-4 md:px-8 py-12">
+        {/* Semantic H2 for current scholar section — screen-reader accessible */}
+        <h2 className="sr-only">
+          {selectedScholarId === 'israr-ahmed' && 'Bayan-ul-Quran Series — Dr. Israr Ahmed'}
+          {selectedScholarId === 'tariq-masood' && 'Lectures by Mufti Tariq Masood'}
+          {selectedScholarId === 'mufti-menk' && 'Lectures by Mufti Menk'}
+          {selectedScholarId === 'nouman-ali-khan' && 'Lectures by Nouman Ali Khan'}
+        </h2>
         <AnimatePresence mode="wait">
           {filteredVideos.length > 0 ? (
             <motion.div
@@ -314,6 +322,22 @@ export default function AcademyPage() {
               className="w-full max-w-6xl h-full md:h-auto md:aspect-video rounded-none md:rounded-[2.5rem] overflow-hidden border-0 md:border md:border-white/10 relative bg-black shadow-[0_0_150px_rgba(0,0,0,1)]"
               onClick={(e) => e.stopPropagation()}
             >
+              {/* SEO Video Schema for active lecture */}
+              <Script
+                id={`academy-video-schema-${activeVideo.surahId || activeVideo.youtubeId || 'video'}`}
+                type="application/ld+json"
+                dangerouslySetInnerHTML={{
+                  __html: JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "VideoObject",
+                    "name": activeVideo.title || `Surah ${activeVideo.surahName}`,
+                    "description": `Lecture ${activeVideo.lectureNumber} by ${selectedScholar.name}.`,
+                    "thumbnailUrl": selectedScholar.image || "https://al-quran-beige.vercel.app/og-image.png",
+                    "uploadDate": "2024-01-01T08:00:00+08:00",
+                    "contentUrl": activeVideo.youtubeId ? `https://www.youtube.com/watch?v=${activeVideo.youtubeId}` : activeVideo.videoUrl
+                  })
+                }}
+              />
               {/* Top Bar Overlay */}
               <div className="absolute top-0 left-0 right-0 z-20 px-8 py-6 flex items-center justify-between bg-gradient-to-b from-black/90 via-black/40 to-transparent">
                 <div className="flex items-center gap-5">
@@ -370,7 +394,7 @@ export default function AcademyPage() {
                     ref={videoRef}
                     controls
                     autoPlay
-                    preload="auto"
+                    preload="metadata"
                     onLoadStart={() => setIsVideoLoading(true)}
                     onCanPlay={() => setIsVideoLoading(false)}
                     onWaiting={() => setIsVideoLoading(true)}

@@ -208,18 +208,20 @@ export const AyahCard: React.FC<AyahCardProps> = ({ ayah, surah, index, isScroll
 
         {/* Translation */}
         {showTranslation && currentTranslation && (
-          <p
-            className={cn(
-              "text-sm leading-relaxed italic border-t pt-3 transition-colors",
-              isLight ? 'text-gray-600 border-gray-100' : 'text-gray-400 border-white/[0.06]',
-              isUrdu && "font-arabic text-lg not-italic text-right"
-            )}
-            dir={isUrdu ? "rtl" : "ltr"}
-          >
-            {currentTranslation}
-          </p>
+          <div className="border-t border-gray-100/10 pt-3">
+            <h2 className="sr-only">Ayah {ayah.ayah_number} Translation</h2>
+            <p
+              className={cn(
+                "text-sm leading-relaxed italic transition-colors",
+                isLight ? 'text-gray-600' : 'text-gray-400',
+                isUrdu && "font-arabic text-lg not-italic text-right"
+              )}
+              dir={isUrdu ? "rtl" : "ltr"}
+            >
+              {currentTranslation}
+            </p>
+          </div>
         )}
-
         {/* Expandable Tafseer */}
         <AnimatePresence>
           {isTafseerOpen && currentTafseer && (
@@ -233,6 +235,7 @@ export const AyahCard: React.FC<AyahCardProps> = ({ ayah, surah, index, isScroll
               <div className={`mt-4 rounded-xl p-4 border transition-colors ${isLight ? 'bg-gray-50 border-gray-200' : 'bg-white/[0.04] border-white/[0.08]'
                 }`}>
                 <div className={cn("flex items-center gap-2 mb-2", isUrdu && "flex-row-reverse")}>
+                  <h2 className="sr-only">Related Tafseer for Ayah {ayah.ayah_number}</h2>
                   <Badge variant="gold" size="sm">Tafseer</Badge>
                   <span className={`text-[10px] ${isLight ? 'text-gray-400' : 'text-gray-500'}`}>Brief Commentary</span>
                 </div>
