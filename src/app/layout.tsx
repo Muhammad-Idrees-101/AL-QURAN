@@ -32,11 +32,11 @@ const BASE_URL = env.NEXT_PUBLIC_SITE_URL;
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'Al-Quran Interactive — Read, Listen & Study the Quran Online',
+    default: 'Al-Quran Interactive Read, Listen & Study the Quran Online',
     template: '%s | Al-Quran Interactive',
   },
   description:
-    'Read all 114 Surahs with English & Urdu translation, audio recitation, Tafseer by Ibn Kathir, authentic Duas, and video lectures by Dr. Israr Ahmed, Mufti Menk & Nouman Ali Khan.',
+    'Read all 114 Surahs with English & Urdu translation, audio recitation, Tafseer by Ibn Kathir, authentic Duas, and video lectures.',
   keywords: [
     'Quran online',
     'read Quran',
@@ -86,19 +86,19 @@ export const metadata: Metadata = {
     siteName: 'Al-Quran Interactive',
     title: 'Al-Quran Interactive — Read, Listen & Study the Quran Online',
     description:
-      'Read all 114 Surahs with English & Urdu translation, audio recitation, Tafseer by Ibn Kathir, authentic Duas, and video lectures by Dr. Israr Ahmed, Mufti Menk & Nouman Ali Khan.',
+      'Read all 114 Surahs with English & Urdu translation, audio recitation, Tafseer by Ibn Kathir, authentic Duas, and video lectures.',
     images: [
       {
         url: `${BASE_URL}/og-image.png`,
         width: 1200,
         height: 630,
-        alt: 'Al-Quran Interactive — Your Spiritual Knowledge Hub',
+        alt: 'Al-Quran Interactive Your Spiritual Knowledge Hub',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Al-Quran Interactive — Read, Listen & Study the Quran Online',
+    title: 'Al-Quran Interactive Read, Listen & Study the Quran Online',
     description:
       'Explore all 114 Surahs with translations, audio, Tafseer, Duas, and video lectures from world-class scholars.',
     images: [`${BASE_URL}/og-image.png`],
