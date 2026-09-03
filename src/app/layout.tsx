@@ -32,7 +32,7 @@ const BASE_URL = env.NEXT_PUBLIC_SITE_URL;
 export const metadata: Metadata = {
   metadataBase: new URL(BASE_URL),
   title: {
-    default: 'Al-Quran Interactive Read, Listen & Study the Quran Online',
+    default: 'Al-Quran Interactive — Read, Listen & Study the Quran Online',
     template: '%s | Al-Quran Interactive',
   },
   description:
